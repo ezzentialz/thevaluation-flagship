@@ -26,7 +26,7 @@ export function MotionRoot({ children }: { children: React.ReactNode }) {
 export function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, anchors: true });
+    const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, anchors: { offset: -112 } });
     let raf = 0;
     const loop = (time: number) => {
       lenis.raf(time);
@@ -97,13 +97,13 @@ export function MaskedTitle({
   );
 }
 
-/** Small gold chapter marker: "01 — About". */
+/** Small accent chapter marker: "01 — About". */
 export function Chapter({ no, label, center }: { no: string; label: string; center?: boolean }) {
   return (
     <Reveal y={16} className={cn('mb-6 flex items-center gap-4', center && 'justify-center')}>
-      <span className="font-display text-brand-gold text-sm tracking-[0.3em]">{no}</span>
-      <span className="h-px w-12 bg-brand-gold/60" />
-      <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">{label}</span>
+      <span className="font-display text-brand-accent text-sm tracking-[0.3em]">{no}</span>
+      <span className="h-px w-12 bg-brand-accent/60" />
+      <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-accent">{label}</span>
     </Reveal>
   );
 }
@@ -126,7 +126,7 @@ export function TiltCard({
   const sy = useSpring(ry, { stiffness: 140, damping: 16, mass: 0.6 });
   const gx = useMotionValue(50);
   const gy = useMotionValue(50);
-  const glow = useTransform([gx, gy], ([x, y]) => `radial-gradient(420px circle at ${x}% ${y}%, rgba(200,169,81,0.18), transparent 60%)`);
+  const glow = useTransform([gx, gy], ([x, y]) => `radial-gradient(420px circle at ${x}% ${y}%, rgba(157,170,248,0.18), transparent 60%)`);
 
   const onMove = (e: React.PointerEvent) => {
     if (reduce || e.pointerType !== 'mouse' || !ref.current) return;
@@ -206,13 +206,13 @@ export function ParallaxImage({
   );
 }
 
-/** Thin gold progress line fixed to the top of the viewport. */
+/** Thin accent progress line fixed to the top of the viewport. */
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
   return (
     <motion.div
-      className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-light"
+      className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-brand-accent-dark via-brand-accent to-brand-accent-light"
       style={{ scaleX }}
     />
   );

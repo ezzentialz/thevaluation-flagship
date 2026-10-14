@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <PageShell title="เกี่ยวกับเรา" subtitle="ประสบการณ์กว่า 30 ปีในการประเมินมูลค่าทรัพย์สิน">
+    <PageShell title="เกี่ยวกับเรา" subtitle="บริษัทประเมินมูลค่าทรัพย์สินของคนไทย ก่อตั้งเมื่อปี 2535">
       <AboutSection />
       <CTASection />
     </PageShell>

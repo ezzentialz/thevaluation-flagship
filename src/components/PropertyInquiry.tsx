@@ -117,7 +117,7 @@ const L = {
 type Values = Record<string, string>;
 
 const inputCls =
-  'w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-white/35 outline-none transition-all duration-300 focus:border-brand-gold focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgba(200,169,81,0.12)]';
+  'w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-white/35 outline-none transition-all duration-300 focus:border-brand-accent focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgba(157,170,248,0.12)]';
 
 export function PropertyInquiry() {
   const { locale } = useI18n();
@@ -294,7 +294,7 @@ export function PropertyInquiry() {
                   type="checkbox"
                   checked={advice}
                   onChange={(e) => setAdvice(e.target.checked)}
-                  className="h-4 w-4 accent-[#C8A951]"
+                  className="h-4 w-4 accent-[#9DAAF8]"
                 />
                 {l.advice[mode]}
               </label>
@@ -331,7 +331,7 @@ export function PropertyInquiry() {
               role="status"
               className={cn(
                 'overflow-hidden rounded-lg px-4 py-3 text-sm',
-                error ? 'border border-red-400/40 bg-red-500/10 text-red-300' : 'border border-brand-gold/40 bg-brand-gold/10 text-brand-gold'
+                error ? 'border border-red-400/40 bg-red-500/10 text-red-300' : 'border border-brand-accent/40 bg-brand-accent/10 text-brand-accent'
               )}
             >
               {error ? l.required : sentKind === 'sent' ? l.delivered : l.opening}

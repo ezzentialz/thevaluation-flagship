@@ -38,14 +38,14 @@ export function TrustBar() {
   return (
     <section
       aria-label={th ? 'การรับรองและสมาชิก' : 'Approvals and memberships'}
-      className="relative border-y border-brand-gold/20 bg-brand-dark py-10"
+      className="relative border-y border-brand-accent/20 bg-brand-dark py-10"
     >
       <div className="section-container">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {items.map((c) => (
               <li key={c.k} className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-gold/10 text-[10px] font-bold tracking-wider text-brand-gold">
+                <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-brand-accent/40 bg-brand-accent/10 text-[10px] font-bold tracking-wider text-brand-accent">
                   {c.k}
                 </span>
                 <span>
@@ -58,7 +58,7 @@ export function TrustBar() {
           <dl className="grid grid-cols-3 gap-6 border-t border-white/10 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
             {facts.map((f) => (
               <div key={f.l}>
-                <dd className="font-display text-3xl font-bold text-brand-gold">{f.v}</dd>
+                <dd className="font-display text-3xl font-bold text-brand-accent">{f.v}</dd>
                 <dt className="mt-1 text-[11px] uppercase tracking-wider text-white/50">{f.l}</dt>
               </div>
             ))}
@@ -92,14 +92,14 @@ export function SectorsSection() {
         />
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
               {th ? 'เราให้บริการ' : 'We serve'}
             </h3>
             <ul className="space-y-3">
               {SECTORS[locale].map((s, i) => (
                 <Reveal key={s} delay={i * 0.04} y={18}>
                   <li className="flex items-center gap-3 border-b border-white/10 pb-3 text-white/80">
-                    <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                     {s}
                   </li>
                 </Reveal>
@@ -107,7 +107,7 @@ export function SectorsSection() {
             </ul>
           </div>
           <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
               {th ? 'ประเภททรัพย์สินที่ประเมิน' : 'Asset classes we value'}
             </h3>
             <ul className="grid gap-3 sm:grid-cols-2">
@@ -159,7 +159,7 @@ export function ApproachSection() {
             <li key={p.t} className="list-none">
               <Reveal delay={i * 0.08} className="h-full">
                 <TiltCard className="h-full rounded-xl border border-white/10 bg-white/[0.04] p-6" max={5}>
-                  <div className="font-display text-4xl font-bold text-brand-gold/60">{String(i + 1).padStart(2, '0')}</div>
+                  <div className="font-display text-4xl font-bold text-brand-accent/60">{String(i + 1).padStart(2, '0')}</div>
                   <h3 className="mt-3 font-semibold text-white">{p.t}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/55">{p.d}</p>
                 </TiltCard>
@@ -204,7 +204,7 @@ export function InternationalSection() {
   const c = INTL[locale];
   return (
     <section id="international" className="relative overflow-hidden bg-gradient-to-b from-brand-navy-light/60 to-brand-navy py-28">
-      <div className="pointer-events-none absolute -right-40 top-10 hidden h-[30rem] w-[30rem] rounded-full bg-brand-gold/[0.07] blur-[120px] md:block" />
+      <div className="pointer-events-none absolute -right-40 top-10 hidden h-[30rem] w-[30rem] rounded-full bg-brand-accent/[0.07] blur-[120px] md:block" />
       <div className="section-container relative grid items-center gap-14 lg:grid-cols-2">
         <div>
           <Chapter no="—" label={c.chapter} />
@@ -222,7 +222,7 @@ export function InternationalSection() {
           {c.points.map((p, i) => (
             <Reveal key={p} delay={i * 0.07} x={30} y={0}>
               <li className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-5">
-                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-gold/20 text-sm font-bold text-brand-gold">
+                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-accent/20 text-sm font-bold text-brand-accent">
                   ✓
                 </span>
                 <span className="text-white/80">{p}</span>

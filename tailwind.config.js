@@ -9,14 +9,18 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          navy: '#0B1426',
-          'navy-light': '#112039',
-          gold: '#C8A951',
-          'gold-light': '#E8D4A0',
-          'gold-dark': '#A68B3D',
+          // Logo blue is ~#2F3B94. Dark surfaces are a deep blue; "accent" is a light periwinkle used for
+          // text, borders and glows on dark backgrounds (readable, unlike the logo blue itself).
+          navy: '#0A1442',
+          'navy-light': '#101C5E',
+          royal: '#3D4FC7',
+          'royal-dark': '#2F3B94',
+          accent: '#9DAAF8',
+          'accent-light': '#C7CFFD',
+          'accent-dark': '#6B7CE8',
           white: '#F8F9FA',
           'white-soft': '#E8ECEF',
-          dark: '#060D18',
+          dark: '#060B2B',
         },
       },
       fontFamily: {

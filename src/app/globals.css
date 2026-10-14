@@ -5,14 +5,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --color-navy: #0B1426;
-  --color-navy-light: #112039;
-  --color-gold: #C8A951;
-  --color-gold-light: #E8D4A0;
-  --color-gold-dark: #A68B3D;
+  --color-navy: #0A1442;
+  --color-navy-light: #101C5E;
+  --color-accent: #9DAAF8;
+  --color-accent-light: #C7CFFD;
+  --color-accent-dark: #6B7CE8;
   --color-white: #F8F9FA;
   --color-white-soft: #E8ECEF;
-  --color-dark: #060D18;
+  --color-dark: #060B2B;
 }
 
 * {
@@ -57,7 +57,7 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply relative px-8 py-4 text-sm font-semibold uppercase tracking-widest text-brand-navy bg-brand-gold overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(200,169,81,0.4)] focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-brand-navy;
+    @apply relative px-8 py-4 text-sm font-semibold uppercase tracking-widest text-white bg-brand-royal overflow-hidden transition-all duration-300 hover:bg-brand-royal-dark hover:shadow-[0_8px_30px_rgba(61,79,199,0.45)] focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 focus:ring-offset-brand-navy;
   }
 
   .btn-primary::before {
@@ -70,7 +70,7 @@ body {
   }
 
   .btn-secondary {
-    @apply relative px-8 py-4 text-sm font-semibold uppercase tracking-widest text-brand-gold border-2 border-brand-gold bg-transparent overflow-hidden transition-all duration-500 hover:bg-brand-gold hover:text-brand-navy hover:shadow-[0_0_40px_rgba(200,169,81,0.3)] focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-brand-navy;
+    @apply relative px-8 py-4 text-sm font-semibold uppercase tracking-widest text-brand-accent border-2 border-brand-accent bg-transparent overflow-hidden transition-all duration-500 hover:bg-brand-accent hover:text-brand-navy hover:shadow-[0_0_40px_rgba(157,170,248,0.3)] focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 focus:ring-offset-brand-navy;
   }
 
   .section-container {
@@ -82,15 +82,15 @@ body {
   }
 
   .section-subtitle {
-    @apply text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4;
+    @apply text-brand-accent text-sm font-semibold uppercase tracking-widest mb-4;
   }
 
   .card-3d {
-    @apply relative bg-brand-navy-light/50 backdrop-blur-sm border border-brand-gold/20 rounded-xl p-8 transition-all duration-500 hover:border-brand-gold/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] hover:scale-[1.02];
+    @apply relative bg-brand-navy-light/50 backdrop-blur-sm border border-brand-accent/20 rounded-xl p-8 transition-all duration-500 hover:border-brand-accent/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] hover:scale-[1.02];
   }
 
-  .text-gradient-gold {
-    @apply bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold bg-clip-text text-transparent;
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent bg-clip-text text-transparent;
   }
 
   .glass-panel {
@@ -108,12 +108,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-gold), var(--color-gold-dark));
+  background: linear-gradient(180deg, var(--color-accent), var(--color-accent-dark));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gold-light);
+  background: var(--color-accent-light);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -174,9 +174,9 @@ body {
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(11, 20, 38, 0.9) 0%,
-    rgba(11, 20, 38, 0.6) 40%,
-    rgba(11, 20, 38, 0.8) 100%
+    rgba(10,20,66, 0.9) 0%,
+    rgba(10,20,66, 0.6) 40%,
+    rgba(10,20,66, 0.8) 100%
   );
   z-index: 0;
 }

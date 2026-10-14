@@ -7,14 +7,14 @@ export default function NotFound() {
         <div
           className="absolute inset-0 animate-grid"
           style={{
-            backgroundImage: `linear-gradient(rgba(200,169,81,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,81,0.1) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(157,170,248,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(157,170,248,0.1) 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
           }}
         />
       </div>
 
       <div className="text-center max-w-md px-6 relative">
-        <div className="text-9xl font-display font-bold text-gradient-gold mb-4">404</div>
+        <div className="text-9xl font-display font-bold text-gradient-accent mb-4">404</div>
         <h2 className="text-2xl text-white mb-4">ไม่พบหน้านี้</h2>
         <p className="text-white/60 mb-8">
           หน้าที่คุณกำลังมองหาไม่มีอยู่ในระบบ

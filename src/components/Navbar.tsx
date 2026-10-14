@@ -1,179 +1,227 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useI18n } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
 
+/**
+ * Two-tier header (modelled on the company's current site):
+ *  - slim royal-blue bar: company name, phone, e-mail, language switch
+ *  - white bar: real logo, single-line navigation with an active-section marker, "Contact us" button
+ * The inline nav only appears from xl (1280px) so labels never wrap; below that a hamburger opens a panel.
+ */
+
+const LOGO = '/images/real/logo-web-372x90.png';
+const PHONE = '0-2717-0801-8';
+const PHONE_HREF = 'tel:027170801';
+const EMAIL = 'info@thevaluation.com';
+
+const SECTIONS = [
+  { id: 'about', th: 'เกี่ยวกับเรา', en: 'About us' },
+  { id: 'services', th: 'บริการ', en: 'Services' },
+  { id: 'properties', th: 'ซื้อ ขาย เช่า', en: 'Buy / Sell / Rent' },
+  { id: 'branches', th: 'สาขา', en: 'Branches' },
+  { id: 'careers', th: 'ร่วมงานกับเรา', en: 'Careers' },
+  { id: 'articles', th: 'บทความวิจัย', en: 'Research' },
+] as const;
+
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+    </svg>
+  );
+}
+
+function MailIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  );
+}
+
+function LangSwitch({ className }: { className?: string }) {
+  const { locale, setLocale } = useI18n();
+  return (
+    <div className={cn('flex items-center text-xs font-semibold', className)} role="group" aria-label="Language">
+      {(['th', 'en'] as const).map((l, i) => (
+        <React.Fragment key={l}>
+          {i > 0 && <span aria-hidden="true" className="mx-1 opacity-40">|</span>}
+          <button
+            type="button"
+            onClick={() => setLocale(l)}
+            aria-pressed={locale === l}
+            className={cn(
+              'rounded px-1.5 py-1 uppercase tracking-wide transition-colors',
+              locale === l ? 'text-white' : 'text-white/55 hover:text-white'
+            )}
+          >
+            {l}
+          </button>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
 export function Navbar() {
-  const { locale, setLocale, t } = useI18n();
+  const { locale, t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('');
+  const th = locale === 'th';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    const sectionIds = ['about', 'services', 'properties', 'branches', 'careers', 'articles', 'contact'];
-    const observer = new IntersectionObserver(
+    const ids = [...SECTIONS.map((s) => s.id), 'contact'];
+    const io = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visible?.target.id) {
-          setActiveSection(visible.target.id);
-        }
+        const hit = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (hit?.target.id) setActive(hit.target.id);
       },
       { rootMargin: '-35% 0px -55% 0px', threshold: [0.1, 0.25, 0.5] }
     );
-
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
     });
-
-    return () => observer.disconnect();
+    return () => io.disconnect();
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMobileOpen(false);
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = open ? 'hidden' : '';
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', onKey);
     };
-  }, [mobileOpen]);
+  }, [open]);
 
-  const navItems = [
-    { key: 'home', href: '/', label: t.nav.home },
-    { key: 'about', href: '/about', label: t.nav.about },
-    { key: 'services', href: '/services', label: t.nav.services },
-    { key: 'properties', href: '/properties', label: t.nav.properties },
-    { key: 'branches', href: '/branches', label: t.nav.branches },
-    { key: 'careers', href: '/careers', label: t.nav.careers },
-    { key: 'articles', href: '/articles', label: t.nav.articles },
-    { key: 'contact', href: '/contact', label: t.nav.contact },
-  ];
+  const contactLabel = t.nav.contact;
 
   return (
-    <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          scrolled
-            ? 'bg-brand-navy/85 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] border-b border-brand-gold/20'
-            : 'bg-transparent'
-        )}
-      >
-        <nav className="section-container flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 flex items-center justify-center">
-              <div className="absolute inset-0 bg-brand-gold/20 rotate-45 rounded-lg transition-transform duration-500 group-hover:rotate-[135deg]" />
-              <span className="relative text-brand-gold font-display text-xl font-bold">
-                V
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-white font-semibold text-sm tracking-wide leading-tight">
-                THE VALUATION
-              </span>
-              <span className="text-brand-gold text-[10px] tracking-[0.3em] uppercase">
-                & Consultants
-              </span>
-            </div>
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* Tier 1: contact strip */}
+      <div className="bg-brand-royal-dark text-[13px] text-white">
+        <div className="section-container flex h-9 items-center justify-between gap-4">
+          <p className="hidden truncate text-white/85 md:block">{th ? 'บริษัท เดอะแวลูเอชั่น แอนด์ คอนซัลแทนท์ส จำกัด' : 'The Valuation & Consultants Co., Ltd.'}</p>
+          <div className="flex items-center gap-5">
+            <a href={PHONE_HREF} className="flex items-center gap-1.5 font-semibold hover:text-brand-accent-light">
+              <PhoneIcon className="h-3.5 w-3.5" />
+              {PHONE}
+            </a>
+            <a href={`mailto:${EMAIL}`} className="hidden items-center gap-1.5 hover:text-brand-accent-light sm:flex">
+              <MailIcon className="h-3.5 w-3.5" />
+              {EMAIL}
+            </a>
+          </div>
+          <LangSwitch />
+        </div>
+      </div>
+
+      {/* Tier 2: logo + navigation */}
+      <div className={cn('bg-white transition-shadow duration-300', scrolled ? 'shadow-[0_6px_24px_rgba(10,20,66,0.18)]' : 'shadow-[0_1px_0_rgba(10,20,66,0.08)]')}>
+        <nav className="section-container flex h-[68px] items-center justify-between gap-6" aria-label="Main">
+          <Link href="/" className="flex-shrink-0" aria-label="The Valuation & Consultants — home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={LOGO} alt="The Valuation & Consultants" width={186} height={45} className="h-[44px] w-auto" />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-1">
-            {navItems.slice(1).map((item) => (
-              <Link
-                key={item.key}
-                href={item.href}
-                className={cn(
-                  'relative px-4 py-2 text-sm text-white/70 hover:text-white transition-colors duration-300 group',
-                  activeSection === item.key && 'text-brand-gold'
-                )}
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full" />
-              </Link>
-            ))}
-          </div>
+          <ul className="hidden items-center gap-1 xl:flex">
+            {SECTIONS.map((s) => {
+              const on = active === s.id;
+              return (
+                <li key={s.id}>
+                  <a
+                    href={`/#${s.id}`}
+                    aria-current={on ? 'true' : undefined}
+                    className={cn(
+                      'relative block whitespace-nowrap px-3.5 py-6 text-[15px] font-medium transition-colors duration-200',
+                      on ? 'text-brand-royal-dark' : 'text-slate-700 hover:text-brand-royal'
+                    )}
+                  >
+                    {th ? s.th : s.en}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        'absolute inset-x-3.5 bottom-0 h-[3px] origin-left bg-brand-royal transition-transform duration-300',
+                        on ? 'scale-x-100' : 'scale-x-0'
+                      )}
+                    />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
 
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setLocale(locale === 'th' ? 'en' : 'th')}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/30 text-brand-gold text-sm font-medium hover:bg-brand-gold hover:text-brand-navy transition-all duration-300"
-            >
-              <span className="text-xs">{locale === 'th' ? 'TH' : 'EN'}</span>
-              <span className="text-[10px] opacity-60">|</span>
-              <span className="text-xs opacity-60">{locale === 'th' ? 'EN' : 'TH'}</span>
-            </button>
-
             <a
-              href="tel:027170801"
-              className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-brand-gold text-brand-navy text-sm font-semibold rounded-full hover:bg-brand-gold-light transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,169,81,0.4)]"
+              href="/#contact"
+              className="hidden whitespace-nowrap rounded bg-brand-royal px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-royal-dark sm:inline-block"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              0-2717-0801-8
+              {contactLabel}
             </a>
-
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 text-white"
-              aria-label="Toggle menu"
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? (th ? 'ปิดเมนู' : 'Close menu') : th ? 'เปิดเมนู' : 'Open menu'}
+              className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded text-brand-royal-dark xl:hidden"
             >
-              <span className={cn('w-6 h-0.5 bg-current transition-all duration-300', mobileOpen && 'rotate-45 translate-y-2')} />
-              <span className={cn('w-6 h-0.5 bg-current transition-all duration-300', mobileOpen && 'opacity-0')} />
-              <span className={cn('w-6 h-0.5 bg-current transition-all duration-300', mobileOpen && '-rotate-45 -translate-y-2')} />
+              <span className={cn('h-0.5 w-6 bg-current transition-transform duration-200', open && 'translate-y-[7px] rotate-45')} />
+              <span className={cn('h-0.5 w-6 bg-current transition-opacity duration-200', open && 'opacity-0')} />
+              <span className={cn('h-0.5 w-6 bg-current transition-transform duration-200', open && '-translate-y-[7px] -rotate-45')} />
             </button>
           </div>
         </nav>
-      </header>
+      </div>
 
+      {/* Mobile / tablet panel */}
       <div
+        id="mobile-menu"
         className={cn(
-          'fixed inset-0 z-40 bg-brand-navy/95 backdrop-blur-xl lg:hidden transition-all duration-500',
-          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          'xl:hidden overflow-hidden bg-white shadow-[0_20px_40px_rgba(10,20,66,0.25)] transition-[max-height,opacity] duration-300 ease-out',
+          open ? 'max-h-[calc(100svh-104px)] overflow-y-auto opacity-100' : 'pointer-events-none max-h-0 opacity-0'
         )}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-6">
-          {navItems.map((item, i) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className={cn(
-                'text-2xl text-white/80 hover:text-brand-gold transition-all duration-500',
-                mobileOpen && 'animate-slide-up'
-              )}
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              {item.label}
-            </Link>
+        <ul className="section-container py-2">
+          {SECTIONS.map((s) => (
+            <li key={s.id} className="border-b border-slate-100">
+              <a
+                href={`/#${s.id}`}
+                onClick={() => setOpen(false)}
+                aria-current={active === s.id ? 'true' : undefined}
+                className={cn(
+                  'flex min-h-[52px] items-center justify-between text-[17px] font-medium',
+                  active === s.id ? 'text-brand-royal-dark' : 'text-slate-800'
+                )}
+              >
+                {th ? s.th : s.en}
+                <span aria-hidden="true" className="text-brand-royal">›</span>
+              </a>
+            </li>
           ))}
-          <button
-            onClick={() => setLocale(locale === 'th' ? 'en' : 'th')}
-            className="mt-4 px-6 py-3 rounded-full border border-brand-gold text-brand-gold"
-          >
-            {locale === 'th' ? 'English' : 'ภาษาไทย'}
-          </button>
-        </div>
+          <li className="py-4">
+            <a
+              href="/#contact"
+              onClick={() => setOpen(false)}
+              className="flex min-h-[52px] items-center justify-center rounded bg-brand-royal text-base font-semibold text-white"
+            >
+              {contactLabel}
+            </a>
+          </li>
+        </ul>
       </div>
-    </>
+    </header>
   );
 }

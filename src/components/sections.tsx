@@ -65,7 +65,7 @@ export function AboutSection() {
 
   return (
     <section id="about" className="relative overflow-hidden bg-brand-navy py-32">
-      <div className="pointer-events-none absolute -left-40 top-20 hidden md:block h-[34rem] w-[34rem] rounded-full bg-brand-gold/[0.07] blur-[120px]" />
+      <div className="pointer-events-none absolute -left-40 top-20 hidden md:block h-[34rem] w-[34rem] rounded-full bg-brand-accent/[0.07] blur-[120px]" />
 
       <div className="section-container relative">
         <div className="grid items-start gap-16 lg:grid-cols-[1.05fr_1fr]">
@@ -87,24 +87,24 @@ export function AboutSection() {
               <ParallaxImage
                 src={`${IMG}/about.jpg`}
                 alt={t.about.title}
-                className="aspect-[4/5] rounded-2xl border border-brand-gold/20"
+                className="aspect-[4/5] rounded-2xl border border-brand-accent/20"
               />
               <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-t from-brand-navy/85 via-transparent to-transparent" />
               <div className="absolute inset-x-6 bottom-6 rounded-xl border border-white/10 bg-brand-navy/80 p-4 md:bg-white/5 md:backdrop-blur-xl">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gold/20 font-bold text-brand-gold">✓</span>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-accent/20 font-bold text-brand-accent">✓</span>
                   <div>
                     <div className="text-sm font-semibold text-white">
                       {th ? 'ได้รับความเห็นชอบจาก ก.ล.ต.' : 'Approved by the SEC'}
                     </div>
-                    <div className="text-xs text-brand-gold">
+                    <div className="text-xs text-brand-accent">
                       {th ? 'และกรมการประกันภัย' : 'and the Department of Insurance'}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="absolute -right-5 -top-5 h-24 w-24 border-r-2 border-t-2 border-brand-gold/40" />
-              <div className="absolute -bottom-5 -left-5 h-24 w-24 border-b-2 border-l-2 border-brand-gold/40" />
+              <div className="absolute -right-5 -top-5 h-24 w-24 border-r-2 border-t-2 border-brand-accent/40" />
+              <div className="absolute -bottom-5 -left-5 h-24 w-24 border-b-2 border-l-2 border-brand-accent/40" />
             </div>
           </Reveal>
         </div>
@@ -114,7 +114,7 @@ export function AboutSection() {
           {stats.map((s, i) => (
             <Reveal key={i} delay={i * 0.08}>
               <TiltCard className="rounded-xl border border-white/10 bg-white/[0.04] p-7 md:backdrop-blur-md">
-                <div className="font-display text-5xl font-bold text-brand-gold">
+                <div className="font-display text-5xl font-bold text-brand-accent">
                   <CountUp to={s.to} />
                 </div>
                 <div className="mt-3 text-xs uppercase tracking-wider text-white/55">{s.label}</div>
@@ -130,7 +130,7 @@ export function AboutSection() {
             {EXECUTIVES[locale].map((e, i) => (
               <Reveal key={e.name} delay={i * 0.07}>
                 <TiltCard className="rounded-xl border border-white/10 bg-white/[0.04] p-6" max={6}>
-                  <div className="mb-4 h-px w-10 bg-brand-gold" />
+                  <div className="mb-4 h-px w-10 bg-brand-accent" />
                   <div className="font-display text-xl text-white">{e.name}</div>
                   <div className="mt-2 text-sm leading-relaxed text-white/55">{e.role}</div>
                 </TiltCard>
@@ -237,9 +237,9 @@ function ListPanel({
     <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
       <Reveal x={flip ? 60 : -60} y={0} className={flip ? 'lg:order-2' : ''}>
         <div className="relative">
-          <ParallaxImage src={image} alt={title} className="aspect-[4/3] rounded-2xl border border-brand-gold/20" />
-          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-brand-navy/70 via-transparent to-brand-gold/10" />
-          <span className="absolute -top-6 left-6 font-display text-8xl font-bold text-brand-gold/25">{no}</span>
+          <ParallaxImage src={image} alt={title} className="aspect-[4/3] rounded-2xl border border-brand-accent/20" />
+          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-brand-navy/70 via-transparent to-brand-accent/10" />
+          <span className="absolute -top-6 left-6 font-display text-8xl font-bold text-brand-accent/25">{no}</span>
         </div>
       </Reveal>
 
@@ -257,7 +257,7 @@ function ListPanel({
               transition={{ duration: 0.8, ease: EASE, delay: i * 0.06 }}
               className="flex items-start gap-4 border-b border-white/5 pb-3 text-white/75"
             >
-              <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rotate-45 bg-brand-gold" />
+              <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rotate-45 bg-brand-accent" />
               <span className="leading-relaxed">{item}</span>
             </motion.li>
           ))}
@@ -273,7 +273,7 @@ export function ServicesSection() {
 
   return (
     <section id="services" className="relative overflow-hidden bg-brand-navy-light/50 py-32">
-      <div className="pointer-events-none absolute -right-40 top-40 hidden md:block h-[32rem] w-[32rem] rounded-full bg-brand-gold/[0.06] blur-[120px]" />
+      <div className="pointer-events-none absolute -right-40 top-40 hidden md:block h-[32rem] w-[32rem] rounded-full bg-brand-accent/[0.06] blur-[120px]" />
       <div className="section-container relative">
         <div className="mx-auto mb-20 max-w-3xl text-center">
           <Chapter no="02" label={t.nav.services} center />
@@ -288,22 +288,22 @@ export function ServicesSection() {
           {t.services.items.map((item, i) => (
             <Reveal key={i} delay={(i % 4) * 0.08} y={50}>
               <TiltCard className="group overflow-hidden rounded-xl border border-white/10 bg-brand-navy/60 p-7 md:backdrop-blur-sm">
-                <span className="absolute right-5 top-4 font-display text-4xl font-bold text-white/[0.06] transition-colors duration-500 group-hover:text-brand-gold/25">
+                <span className="absolute right-5 top-4 font-display text-4xl font-bold text-white/[0.06] transition-colors duration-500 group-hover:text-brand-accent/25">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div
-                  className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl border border-brand-gold/20 bg-brand-gold/10 text-brand-gold transition-all duration-500 group-hover:bg-brand-gold group-hover:text-brand-navy"
+                  className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl border border-brand-accent/20 bg-brand-accent/10 text-brand-accent transition-all duration-500 group-hover:bg-brand-accent group-hover:text-brand-navy"
                   style={{ transform: 'translateZ(30px)' }}
                 >
                   {serviceIcons[item.icon]}
                 </div>
                 <h3
-                  className="text-lg font-semibold leading-snug text-white transition-colors duration-300 group-hover:text-brand-gold"
+                  className="text-lg font-semibold leading-snug text-white transition-colors duration-300 group-hover:text-brand-accent"
                   style={{ transform: 'translateZ(20px)' }}
                 >
                   {item.title}
                 </h3>
-                <span className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-0 bg-gradient-to-r from-brand-gold to-brand-gold-light transition-transform duration-500 group-hover:scale-x-100" />
+                <span className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-0 bg-gradient-to-r from-brand-accent to-brand-accent-light transition-transform duration-500 group-hover:scale-x-100" />
               </TiltCard>
             </Reveal>
           ))}
@@ -345,7 +345,7 @@ export function PropertiesSection() {
 
   return (
     <section id="properties" className="relative overflow-hidden bg-brand-navy py-32">
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 via-transparent to-brand-gold/5" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 via-transparent to-brand-accent/5" />
       <div className="section-container relative">
         <div className="mx-auto mb-16 max-w-3xl text-center">
           <Chapter no="03" label={t.nav.properties} center />
@@ -364,7 +364,7 @@ export function PropertiesSection() {
                   <div className="mb-6 inline-block text-4xl transition-transform duration-500 group-hover:scale-125 group-hover:-rotate-6">
                     {tile.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-brand-gold">
+                  <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-brand-accent">
                     {tile.label}
                   </h3>
                 </button>
@@ -428,7 +428,7 @@ function MapModal({ src, title, onClose }: { src: string; title: string; onClose
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-gold hover:text-brand-navy"
+          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-accent hover:text-brand-navy"
         >
           ✕
         </button>
@@ -534,22 +534,22 @@ export function BranchesSection() {
               style={{ transformPerspective: 1000 }}
             >
               <TiltCard className="group overflow-hidden rounded-xl border border-white/10 bg-brand-navy/60 p-7 md:backdrop-blur-sm" max={6}>
-                <div className="absolute left-0 top-0 h-16 w-full bg-gradient-to-r from-brand-gold/10 to-transparent" />
+                <div className="absolute left-0 top-0 h-16 w-full bg-gradient-to-r from-brand-accent/10 to-transparent" />
                 <div className="relative mb-4 flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-brand-gold">{b.name}</h3>
-                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-brand-gold/30 text-xs font-bold text-brand-gold">
+                  <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-brand-accent">{b.name}</h3>
+                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-brand-accent/30 text-xs font-bold text-brand-accent">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </div>
                 <p className="relative mb-5 text-sm leading-relaxed text-white/60">{b.address}</p>
                 <div className="relative space-y-1 text-sm">
-                  <div className="text-brand-gold">☎ {b.phones}</div>
+                  <div className="text-brand-accent">☎ {b.phones}</div>
                   {b.mobile && (
                     <div className="pl-5 text-white/60">
                       {th ? 'มือถือ' : 'Mobile'} {b.mobile}
                     </div>
                   )}
-                  <a href={`mailto:${b.email}`} className="block py-1.5 pl-5 text-white/60 transition-colors hover:text-brand-gold">
+                  <a href={`mailto:${b.email}`} className="block py-1.5 pl-5 text-white/60 transition-colors hover:text-brand-accent">
                     {b.email}
                   </a>
                 </div>
@@ -557,7 +557,7 @@ export function BranchesSection() {
                   <button
                     type="button"
                     onClick={() => setOpenMap({ src: b.map!, title: b.name })}
-                    className="relative mt-5 rounded-full border border-brand-gold/40 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-gold transition-all duration-300 hover:bg-brand-gold hover:text-brand-navy"
+                    className="relative mt-5 rounded-full border border-brand-accent/40 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-accent transition-all duration-300 hover:bg-brand-accent hover:text-brand-navy"
                   >
                     {th ? 'ดูแผนที่' : 'View map'}
                   </button>
@@ -606,16 +606,16 @@ export function CareersSection() {
             <div className="space-y-4">
               {positions.map((pos, i) => (
                 <Reveal key={i} delay={i * 0.07} x={-30} y={0}>
-                  <div className="group flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-5 md:backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-brand-gold/40 hover:bg-white/[0.07]">
+                  <div className="group flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-5 md:backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-white/[0.07]">
                     <div>
-                      <h4 className="font-medium text-white transition-colors group-hover:text-brand-gold">{pos.title}</h4>
+                      <h4 className="font-medium text-white transition-colors group-hover:text-brand-accent">{pos.title}</h4>
                       <p className="mt-1 text-sm text-white/50">
                         {th ? `รับสมัคร ${pos.openings} อัตรา` : `${pos.openings} positions`} • {th ? 'กรุงเทพฯ' : 'Bangkok'}
                       </p>
                     </div>
                     <a
                       href={`mailto:job@thevaluation.com?subject=${encodeURIComponent(pos.title)}`}
-                      className="flex-shrink-0 rounded-full border border-brand-gold/40 px-4 py-2 text-sm text-brand-gold transition-all duration-300 hover:bg-brand-gold hover:text-brand-navy"
+                      className="flex-shrink-0 rounded-full border border-brand-accent/40 px-4 py-2 text-sm text-brand-accent transition-all duration-300 hover:bg-brand-accent hover:text-brand-navy"
                     >
                       {t.careers.apply}
                     </a>
@@ -631,7 +631,7 @@ export function CareersSection() {
               <div className="space-y-4 text-sm leading-relaxed text-white/70">
                 <p>
                   {th ? 'ส่งอีเมลมาที่ ' : 'Send an email to '}
-                  <a href="mailto:job@thevaluation.com" className="text-brand-gold transition-colors hover:text-brand-gold-light">
+                  <a href="mailto:job@thevaluation.com" className="text-brand-accent transition-colors hover:text-brand-accent-light">
                     job@thevaluation.com
                   </a>
                   {th ? ' หรือส่งจดหมายสมัครงาน' : ' or send a cover letter.'}
@@ -700,7 +700,7 @@ export function CTASection() {
   const { t, locale } = useI18n();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold py-32">
+    <section className="relative overflow-hidden bg-gradient-to-r from-brand-accent via-brand-accent-light to-brand-accent py-32">
       <motion.div
         className="pointer-events-none absolute inset-y-0 -left-1/3 hidden w-1/3 skew-x-[-20deg] bg-white/30 blur-2xl md:block"
         animate={{ x: ['0%', '420%'] }}
@@ -741,7 +741,7 @@ export function CTASection() {
 /* ------------------------------------------------------------------ */
 
 const fieldCls =
-  'w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-white/35 outline-none transition-all duration-300 focus:border-brand-gold focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgba(200,169,81,0.12)]';
+  'w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-white/35 outline-none transition-all duration-300 focus:border-brand-accent focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgba(157,170,248,0.12)]';
 
 export function ContactSection() {
   const { t, locale } = useI18n();
@@ -782,7 +782,7 @@ export function ContactSection() {
     {
       label: t.contact.emailLabel,
       lines: [
-        <a key="m" href="mailto:info@thevaluation.com" className="text-brand-gold transition-colors hover:text-brand-gold-light">
+        <a key="m" href="mailto:info@thevaluation.com" className="text-brand-accent transition-colors hover:text-brand-accent-light">
           info@thevaluation.com
         </a>,
       ],
@@ -825,7 +825,7 @@ export function ContactSection() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden rounded-lg border border-brand-gold/40 bg-brand-gold/10 px-4 py-3 text-sm text-brand-gold"
+                    className="overflow-hidden rounded-lg border border-brand-accent/40 bg-brand-accent/10 px-4 py-3 text-sm text-brand-accent"
                   >
                     {submitted === 'sent'
                       ? th

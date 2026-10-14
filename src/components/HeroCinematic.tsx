@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useI18n } from '@/context/I18nContext';
 
-const GoldDust = dynamic(() => import('@/components/three/GoldDust').then((m) => m.GoldDust), {
+const AccentDust = dynamic(() => import('@/components/three/AccentDust').then((m) => m.AccentDust), {
   ssr: false,
   loading: () => null,
 });
@@ -89,13 +89,13 @@ export function HeroCinematic() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-dark/80 via-transparent to-transparent" />
         <div
           className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at 70% 40%, transparent 35%, rgba(6,13,24,0.7) 100%)' }}
+          style={{ background: 'radial-gradient(ellipse at 70% 40%, transparent 35%, rgba(6,11,43,0.7) 100%)' }}
         />
         <motion.div className="pointer-events-none absolute inset-0 bg-brand-dark" style={{ opacity: dim }} />
 
-        {/* 3D gold dust over the footage */}
+        {/* 3D accent dust over the footage */}
         <div className="pointer-events-none absolute inset-0">
-          <GoldDust active={inView} />
+          <AccentDust active={inView} />
         </div>
 
         {/* Cinematic letterbox bars */}
@@ -117,23 +117,29 @@ export function HeroCinematic() {
           className="section-container relative z-10 flex h-full items-center"
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
-          <div className="max-w-4xl [perspective:1000px]">
+          <div className="max-w-5xl [perspective:1000px]">
             <motion.div
               className="mb-8 flex items-center gap-4"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: EASE, delay: 0.9 }}
             >
-              <span className="h-px w-14 bg-brand-gold" />
-              <span className="text-xs font-semibold uppercase tracking-[0.35em] text-brand-gold">
+              <span className="h-px w-14 bg-brand-accent" />
+              <span className="text-xs font-semibold uppercase tracking-[0.35em] text-brand-accent">
                 {locale === 'th' ? 'ก่อตั้ง พ.ศ. 2535' : 'Since 1992'}
               </span>
             </motion.div>
 
-            <h1 className="font-display text-5xl font-semibold leading-[1.05] text-white sm:text-7xl lg:text-8xl">
+            <h1
+              className={
+                locale === 'th'
+                  ? 'font-display text-[1.85rem] font-semibold leading-[1.2] text-white min-[400px]:text-4xl sm:text-6xl lg:text-7xl'
+                  : 'font-display text-5xl font-semibold leading-[1.05] text-white sm:text-7xl lg:text-8xl'
+              }
+            >
               <RevealLine delay={0.7}>{nameLines[0]}</RevealLine>
               <RevealLine delay={0.85}>
-                <span className="text-gradient-gold">{nameLines[1]}</span>
+                <span className="text-gradient-accent">{nameLines[1]}</span>
               </RevealLine>
             </h1>
 
@@ -170,7 +176,7 @@ export function HeroCinematic() {
           <span className="text-[10px] uppercase tracking-[0.4em] text-white/50">{t.hero.scrollDown}</span>
           <span className="relative h-12 w-px overflow-hidden bg-white/20">
             <motion.span
-              className="absolute inset-x-0 top-0 h-5 bg-brand-gold"
+              className="absolute inset-x-0 top-0 h-5 bg-brand-accent"
               animate={{ y: ['-100%', '260%'] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             />

@@ -43,7 +43,7 @@ function Dust({ count: COUNT }: { count: number }) {
       </bufferGeometry>
       <pointsMaterial
         size={0.07}
-        color="#E8D4A0"
+        color="#C7CFFD"
         transparent
         opacity={0.75}
         sizeAttenuation
@@ -54,7 +54,7 @@ function Dust({ count: COUNT }: { count: number }) {
   );
 }
 
-export function GoldDust({ active = true }: { active?: boolean }) {
+export function AccentDust({ active = true }: { active?: boolean }) {
   const mobile = typeof window !== 'undefined' && window.innerWidth < 768;
   return (
     <Canvas

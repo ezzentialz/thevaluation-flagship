@@ -125,7 +125,7 @@ function Points({ positions }: { positions: Float32Array }) {
       </bufferGeometry>
       <pointsMaterial
         size={0.15}
-        color={new Color(0xc8a951)}
+        color={new Color(0x9daaf8)}
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -153,7 +153,7 @@ function LightBeam({ position, height = 25 }: { position: [number, number, numbe
     >
       <cylinderGeometry args={[0.5, 4, height, 16, 1, true]} />
       <meshStandardMaterial
-        color={new Color(0xc8a951)}
+        color={new Color(0x9daaf8)}
         transparent
         opacity={0.1}
         side={DoubleSide}
@@ -173,7 +173,7 @@ function SceneContent({
 }) {
   return (
     <>
-      <fog attach="fog" args={[new Color(0x0b1426), 20, 90]} />
+      <fog attach="fog" args={[new Color(0x0a1442), 20, 90]} />
       <ambientLight color={new Color(0x2a3a5a)} intensity={0.6} />
       <directionalLight
         position={[10, 20, 10]}
@@ -183,7 +183,7 @@ function SceneContent({
       />
       <directionalLight position={[-10, 10, -10]} intensity={0.3} color={new Color(0x4a6a9a)} />
 
-      <pointLight position={[0, 15, 5]} intensity={2} color={new Color(0xc8a951)} distance={60} />
+      <pointLight position={[0, 15, 5]} intensity={2} color={new Color(0x9daaf8)} distance={60} />
       <pointLight position={[-15, 8, 10]} intensity={1} color={new Color(0x4a8ac8)} distance={50} />
       <pointLight position={[15, 10, -10]} intensity={0.8} color={new Color(0xc85a8a)} distance={50} />
 
