@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-navy: #0B1426;
+  --color-navy-light: #112039;
+  --color-gold: #C8A951;
+  --color-gold-light: #E8D4A0;
+  --color-gold-dark: #A68B3D;
+  --color-white: #F8F9FA;
+  --color-white-soft: #E8ECEF;
+  --color-dark: #060D18;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  font-family: 'Inter', 'Sarabun', ui-sans-serif, system-ui;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative px-8 py-4 text-sm font-semibold uppercase tracking-widest text-brand-navy bg-brand-gold overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(200,169,81,0.4)] focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-brand-navy;
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] transition-transform duration-700;
+  }
+
+  .btn-primary:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  .btn-secondary {
+    @apply relative px-8 py-4 text-sm font-semibold uppercase tracking-widest text-brand-gold border-2 border-brand-gold bg-transparent overflow-hidden transition-all duration-500 hover:bg-brand-gold hover:text-brand-navy hover:shadow-[0_0_40px_rgba(200,169,81,0.3)] focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-brand-navy;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+  }
+
+  .section-title {
+    @apply font-display text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4;
+  }
+
+  .card-3d {
+    @apply relative bg-brand-navy-light/50 backdrop-blur-sm border border-brand-gold/20 rounded-xl p-8 transition-all duration-500 hover:border-brand-gold/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] hover:scale-[1.02];
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold bg-clip-text text-transparent;
+  }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-xl;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-gold), var(--color-gold-dark));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes grid-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.animate-grid {
+  animation: grid-move 20s linear infinite;
+}
+
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.canvas-container.interactive {
+  pointer-events: auto;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 10;
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 20, 38, 0.9) 0%,
+    rgba(11, 20, 38, 0.6) 40%,
+    rgba(11, 20, 38, 0.8) 100%
+  );
+  z-index: 0;
+}
+/* Lenis owns smooth scrolling; native smooth-scroll would fight it. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
